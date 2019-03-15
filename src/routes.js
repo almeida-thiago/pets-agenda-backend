@@ -17,7 +17,7 @@ const loginUser = (router) =>
   router.post('/login', async (req, res) => {
     const data = req.body
     const login = await require('./controllers/login-user')(data)
-    const response = login ? { success: true, login } : { error: true, message: 'Access denied.' }
+    const response = login ? { success: true, ...login } : { error: true, message: 'Access denied.' }
     res.send(response)
   })
 
