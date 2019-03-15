@@ -15,7 +15,8 @@ Api to access data of Pet's agenda.
 
 ```json
 {
-  "success": true
+  "success": true,
+  "user": "4edd40c86762e0fb12000003"
 }
 ```
 

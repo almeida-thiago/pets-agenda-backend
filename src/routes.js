@@ -8,7 +8,8 @@ const createUser = (router) =>
   router.post('/user', async (req, res) => {
     const data = req.body
     const create = await require('./controllers/create-user')(data)
-    const response = create ? { success: true } : { error: true, message: 'Erro on create data.' }
+    const response = create ? { success: true, user: create } : { error: true, message: 'Erro on create data.' }
+    console.log(response)
     res.send(response)
   })
 

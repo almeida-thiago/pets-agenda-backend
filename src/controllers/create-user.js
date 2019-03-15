@@ -10,8 +10,8 @@ const createUser = async (data) => {
   try {
     const hash = await bcrypt.hashSync(data.password, 10) // Create password hash
     const newData = { ...data, password: hash } // Ajust data
-    await userModel.create(newData) // Save data in database
-    return true
+    const createdUser = await userModel.create(newData) // Save data in database
+    return createdUser._id
   } catch (error) {
     return false
   }
