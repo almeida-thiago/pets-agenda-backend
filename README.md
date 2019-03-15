@@ -73,6 +73,40 @@ Api to access data of Pet's agenda.
 
 ---
 
+### Revalidate login
+
+`PUT /revalidate - JSON`
+
+|Param|Description        |
+|:---:|-------------------|
+|`id` |User id. `Required`|
+
+#### Response
+
+```json
+{
+  "success": true,
+  "token": "TOKEN"
+}
+```
+
+```json
+{
+  "error": true,
+  "message": "Access denied."
+}
+```
+
+#### Post exemple
+
+```json
+  {
+    "user": "4edd40c86762e0fb12000003"
+  }
+```
+
+---
+
 ### Create pet
 
 `POST /pet - JSON`
@@ -139,6 +173,39 @@ Api to access data of Pet's agenda.
 ```json
   {
     "user": "4edd40c86762e0fb12000003"
+  }
+```
+
+---
+
+### Delete pet
+
+`DELETE /pet - JSON`
+
+|Param|Description        |
+|:---:|-------------------|
+|`id` |Task id. `Required`|
+
+#### Response
+
+```json
+{
+  "success": true
+}
+```
+
+```json
+{
+  "error": true,
+  "message": "Erro on delete data."
+}
+```
+
+#### Delete exemple
+
+```json
+  {
+    "id": "4edd40c86762e0fb12000003"
   }
 ```
 

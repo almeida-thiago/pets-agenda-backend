@@ -21,6 +21,15 @@ const loginUser = (router) =>
     res.send(response)
   })
 
+/** Revalidate login */
+const revalidateLogin = (router) =>
+  router.put('/revalidate', verifyAuth, async (req, res) => {
+    const data = req.body
+    const token = await require('./controllers/login-revalidate')(data, req)
+    const response = token ? { success: true, token } : { error: true, message: 'Access denied.' }
+    res.send(response)
+  })
+
 /** Create Pet */
 const createPet = (router) =>
   router.post('/pet', verifyAuth, async (req, res) => {
@@ -30,10 +39,19 @@ const createPet = (router) =>
     res.send(response)
   })
 
+/** Delete pet */
+const deletePet = (router) =>
+  router.delete('/pet', verifyAuth, async (req, res) => {
+    const data = req.query
+    const remove = await require('./controllers/delete-pet')(data)
+    const response = remove ? { success: true } : { error: true, message: 'Erro on delete data.' }
+    res.send(response)
+  })
+
 /** List pets */
 const listPet = (router) =>
   router.get('/pet', verifyAuth, async (req, res) => {
-    const data = req.body
+    const data = req.query
     const list = await require('./controllers/list-pet')(data)
     const response = list ? { success: true, data: list } : { error: true, message: 'Erro on list data.' }
     res.send(response)
@@ -51,7 +69,7 @@ const createTask = (router) =>
 /** List tasks */
 const listTask = (router) =>
   router.get('/task', verifyAuth, async (req, res) => {
-    const data = req.body
+    const data = req.query
     const list = await require('./controllers/list-task')(data)
     const response = list ? { success: true, data: list } : { error: true, message: 'Erro on list data.' }
     res.send(response)
@@ -60,7 +78,7 @@ const listTask = (router) =>
 /** Delete task */
 const deleteTask = (router) =>
   router.delete('/task', verifyAuth, async (req, res) => {
-    const data = req.body
+    const data = req.query
     const remove = await require('./controllers/delete-task')(data)
     const response = remove ? { success: true } : { error: true, message: 'Erro on delete data.' }
     res.send(response)
@@ -76,7 +94,9 @@ const routerError = (router) =>
 module.exports = [
   createUser(router),
   loginUser(router),
+  revalidateLogin(router),
   createPet(router),
+  deletePet(router),
   listPet(router),
   createTask(router),
   listTask(router),
