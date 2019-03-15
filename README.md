@@ -77,9 +77,9 @@ Api to access data of Pet's agenda.
 
 `PUT /revalidate - JSON`
 
-|Param|Description        |
-|:---:|-------------------|
-|`id` |User id. `Required`|
+|Param  |Description        |
+|:-----:|-------------------|
+|`user` |User id. `Required`|
 
 #### Response
 
